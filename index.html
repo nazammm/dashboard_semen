@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Distribusi</title>
+
+<!-- Vendor library (lokal, tidak bergantung pada CDN eksternal) -->
+<link rel="stylesheet" href="vendor/leaflet.css">
+
+<!-- Stylesheet aplikasi (termasuk font Big Shoulders Display / IBM Plex, dibundel lokal — tanpa Google Fonts CDN) -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav id="mobtop" aria-label="Navigasi utama (mobile)"></nav>
+<aside id="sidebar">
+  <div class="brand">
+    <img src="assets/logo.svg" alt="Logo Perusahaan" class="brand-logo" onerror="this.style.display='none'">
+    <div class="mark">DASHBOARD<br>SEMEN</div>
+  </div>
+  <nav id="nav" aria-label="Navigasi utama"></nav>
+  <div class="foot" id="sidebar-foot"><span class="dot" aria-hidden="true"></span>SUMBER: SUPABASE</div>
+</aside>
+
+<main id="main"><div id="app" class="page"><div class="loading" role="status"><div class="spinner" aria-hidden="true"></div>Memuat…</div></div></main>
+
+<!-- Vendor library -->
+<script src="vendor/chart.umd.js"></script>
+<script src="vendor/leaflet.js"></script>
+
+<!-- Aplikasi (urutan penting: config & data & utils dulu, baru halaman, baru router) -->
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/pages/beranda.js"></script>
+<script src="js/pages/performa-daerah.js"></script>
+<script src="js/pages/delivery.js"></script>
+<script src="js/pages/rekap-harian.js"></script>
+<script src="js/pages/tim-sales.js"></script>
+<script src="js/pages/peta-toko.js"></script>
+<script src="js/pages/tanya-ai.js"></script>
+<script src="js/pages/transaksi-detail.js"></script>
+<script src="js/router.js"></script>
+</body>
+</html>
