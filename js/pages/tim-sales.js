@@ -5,16 +5,13 @@ async function renderTimSales(app){
   const monthsWithActual = [...new Set(rows.filter(r=>r.actual_num_do>0).map(r=>r.month))];
   const defaultMonth = monthsWithActual.length ? Math.max(...monthsWithActual) : 1;
 
-  const filters = { dist:'all', month:defaultMonth, onlyReal:true, topN:10 };
+  const filters = { dist:'all', month:defaultMonth, topN:10 };
   let sortKey = 'capaian_avg', sortDir = -1;
 
   const filtersHTML = `
     <div class="controls" style="margin-bottom:0;">
       <div class="control"><label for="sDist">Distributor</label><select id="sDist"><option value="all">Semua Distributor</option>${dists.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join('')}</select></div>
       <div class="control"><label for="sMonth">Bulan</label><select id="sMonth">${MONTHS_ID.slice(1).map((m,i)=>`<option value="${i+1}" ${i+1===defaultMonth?'selected':''}>${m} 2026</option>`).join('')}</select></div>
-      <div class="control"><span id="sRealLabel" class="control-group-label">Status</span>
-        <button type="button" class="chip active" id="sReal" aria-pressed="true" aria-labelledby="sRealLabel sReal">Hanya Salesman Aktif</button>
-      </div>
     </div>
   `;
 
@@ -71,7 +68,7 @@ async function renderTimSales(app){
     return rows.filter(r =>
       r.month === filters.month &&
       (filters.dist==='all' || r.dist_code===filters.dist) &&
-      (!filters.onlyReal || r.status==='Sales Real')
+      r.status==='Sales Real'
     ).map(r => {
       const capaian_ta = pct(r.actual_ta, r.target_ta) ?? -1;
       const capaian_tonase = pct(r.actual_tonase, r.target_tonase) ?? -1;
@@ -93,7 +90,7 @@ async function renderTimSales(app){
     const aboveTarget = withTargetTonase.filter(r=>r.capaian_tonase>=100).length;
 
     document.getElementById('tsKpis').innerHTML = `
-      <div class="card"><div class="card-title">Salesman Ditampilkan</div><div class="kpi-value">${fmt(list.length)}</div><div class="kpi-delta">${MONTHS_ID[filters.month]} 2026${filters.onlyReal?' &middot; status aktif':''}</div></div>
+      <div class="card"><div class="card-title">Salesman Ditampilkan</div><div class="kpi-value">${fmt(list.length)}</div><div class="kpi-delta">${MONTHS_ID[filters.month]} 2026 &middot; status aktif</div></div>
       <div class="card"><div class="card-title">Rata-rata Capaian TA</div><div class="kpi-value">${avgTA==null?'–':avgTA.toFixed(0)+'%'}</div><div class="kpi-delta">Toko aktif vs target</div></div>
       <div class="card"><div class="card-title">Rata-rata Capaian Tonase</div><div class="kpi-value">${avgTonase==null?'–':avgTonase.toFixed(0)+'%'}</div><div class="kpi-delta">vs target ${MONTHS_ID[filters.month]} 2026</div></div>
       <div class="card"><div class="card-title">Capai/Lampaui Target</div><div class="kpi-value">${fmt(aboveTarget)}<span class="unit">/ ${fmt(withTargetTonase.length)}</span></div><div class="kpi-delta">Berdasarkan target tonase bulan ini</div></div>
@@ -153,12 +150,6 @@ async function renderTimSales(app){
 
   document.getElementById('sDist').addEventListener('change', e => { filters.dist = e.target.value; redraw(); });
   document.getElementById('sMonth').addEventListener('change', e => { filters.month = +e.target.value; redraw(); });
-  document.getElementById('sReal').addEventListener('click', (e) => {
-    filters.onlyReal = !filters.onlyReal;
-    e.target.classList.toggle('active');
-    e.target.setAttribute('aria-pressed', String(filters.onlyReal));
-    redraw();
-  });
   document.querySelectorAll('.pill-row .chip[data-n]').forEach(chip => {
     chip.addEventListener('click', () => {
       document.querySelectorAll('.pill-row .chip[data-n]').forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); });

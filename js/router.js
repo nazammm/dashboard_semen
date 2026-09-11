@@ -5,7 +5,6 @@ const ICONS = {
   rekap: '<rect x="3.5" y="4" width="17" height="16" rx="1"/><path d="M3.5 9h17"/><path d="M8 4v-1.5M16 4v-1.5"/><path d="M7 13h2M11 13h2M15 13h2M7 16.5h2M11 16.5h2"/>',
   timsales: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17.5" cy="9" r="2.3"/><path d="M15.5 20c.3-2.6 2-4.5 4.3-4.9"/>',
   peta: '<path d="M12 21s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/>',
-  tanyaai: '<rect x="4" y="5" width="16" height="12" rx="1"/><path d="M8 21h8M12 17v4"/><circle cx="9" cy="11" r=".9" fill="currentColor"/><circle cx="15" cy="11" r=".9" fill="currentColor"/>',
   delivery: '<path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18.5" r="1.6"/><circle cx="17.5" cy="18.5" r="1.6"/>'
 };
 
@@ -21,9 +20,6 @@ const NAV_GROUPS = [
   ]},
   { label:'Operasional', items:[
     { id:'peta-toko', label:'Peta Toko', icon:ICONS.peta },
-  ]},
-  { label:'Intelligence', items:[
-    { id:'tanya-ai', label:'Tanya AI', icon:ICONS.tanyaai },
   ]},
 ];
 const PAGES = NAV_GROUPS.flatMap(g => g.items);
@@ -50,7 +46,6 @@ const RENDERERS = {
   'rekap-harian': renderRekapHarian,
   'tim-sales': renderTimSales,
   'peta-toko': renderPetaToko,
-  'tanya-ai': renderTanyaAI,
   'transaksi-detail': renderTransaksiDetail,
 };
 PAGE_LABEL['transaksi-detail'] = 'Detail Transaksi';

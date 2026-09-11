@@ -19,7 +19,7 @@ async function renderBeranda(app){
     .slice(0,5);
   const heroTop = heroRanking[0] || { dist_code:'–', dist_name:'Belum ada data', tonase:0 };
 
-  const state = { dist:'all', jenis:'all', period:'ytd', topN:10 };
+  const state = { dist:'all', jenis:'all', period:'mtd', topN:10 };
 
   app.innerHTML = `
     <section class="hero">
@@ -41,8 +41,8 @@ async function renderBeranda(app){
               </div>
               <div class="control"><span id="bPeriodLabel" class="control-group-label" style="color:#8F8874;">Periode</span>
                 <div class="pill-row" role="group" aria-labelledby="bPeriodLabel">
-                  <button type="button" class="chip active" data-p="ytd" aria-pressed="true" style="background:var(--accent);color:#fff;border-color:var(--accent);">YTD</button>
-                  <button type="button" class="chip" data-p="mtd" aria-pressed="false" style="background:#2A2621;color:#EDE9DF;border-color:#443F35;">MTD</button>
+                  <button type="button" class="chip" data-p="ytd" aria-pressed="false" style="background:#2A2621;color:#EDE9DF;border-color:#443F35;">YTD</button>
+                  <button type="button" class="chip active" data-p="mtd" aria-pressed="true" style="background:var(--accent);color:#fff;border-color:var(--accent);">MTD</button>
                 </div>
               </div>
             </div>
